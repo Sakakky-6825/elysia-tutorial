@@ -1,13 +1,13 @@
-services:  
+services:
   - type: web
     name: sakakky-elysiajs-tutorial
     runtime: node
     repo: https://github.com/Sakakky-6825/elysia-tutorial
     plan: free
     envVars:
-    - key: BUN_VERSION
-      value: 1.1.0
+      - key: BUN_VERSION
+        value: 1.1.0
     region: oregon
-    buildCommand: bun install
+    buildCommand: bun install && bun run migrate:dev-init && bunx prisma generate && bun run seed
     startCommand: bun start
 version: "1"
