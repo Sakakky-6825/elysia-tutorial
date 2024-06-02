@@ -18,6 +18,6 @@
   },
   "module": "src/index.js",
   "prisma": {
-    "seed": "bun prisma/seed.ts"
+    "seed": "bun run prisma/seed.ts"
   }
 }
