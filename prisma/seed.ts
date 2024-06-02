@@ -1,41 +1,42 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 
 const prismaClient = new PrismaClient();
 
-const initUsers = [
+const initUsers: Prisma.UserCreateInput[] = [
   {
-    "username": "john_doe",
-    "password": "securePassword123"
+    username: "john_doe",
+    password: "securePassword123",
   },
   {
-    "username": "jane_smith",
-    "password": "password456!"
+    username: "jane_smith",
+    password: "password456!",
   },
   {
-    "username": "alice_jones",
-    "password": "alicePassword789"
+    username: "alice_jones",
+    password: "alicePassword789",
   },
   {
-    "username": "bob_brown",
-    "password": "bobSecurePassword321"
+    username: "bob_brown",
+    password: "bobSecurePassword321",
   },
   {
-    "username": "charlie_davis",
-    "password": "charlieSecret987"
-  }
+    username: "charlie_davis",
+    password: "charlieSecret987",
+  },
+  {
+    username: "john_don",
+    password: "johnSecret765",
+  },
 ];
 
-const main = async () => {
-  try {
-    const users = await prismaClient.user.createMany({data: initUsers})
-    console.log("create users:", users)
-  }
-  catch (error) {
-    console.error(error)
-    process.exit(1)
-  } finally {
-    await prismaClient.$disconnect()
-  }
+try {
+  const createUsers = await prismaClient.user.createMany({
+    data: initUsers,
+    skipDuplicates: true,
+  });
+  console.log("created users:", createUsers);
+} catch (error) {
+  console.error("Error during user creation:", error);
+} finally {
+  await prismaClient.$disconnect();
 }
-
-main()
