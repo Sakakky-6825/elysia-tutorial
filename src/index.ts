@@ -1,10 +1,7 @@
+import { PrismaClient } from "@prisma/client";
 import { Elysia } from "elysia";
+import routes from "./routes";
 
-const app = new Elysia()
+const app = new Elysia().use(routes).get("/helth-check", () => "OK");
 
-app.get("/helth-check", () => "OK");
 app.listen(3000);
-
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
-);
