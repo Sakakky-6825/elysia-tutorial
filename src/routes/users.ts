@@ -1,12 +1,12 @@
 import Elysia from "elysia";
 import { prismaClient } from "../utils/prisma";
 
-const users = new Elysia();
+const userRoutes = new Elysia().group("/users", (app) => {
+  return app.get("/", async () => {
+    const users = await prismaClient.user.findMany();
 
-users.get("/", async () => {
-  const users = await prismaClient.user.findMany();
-
-  return { users };
+    return { users };
+  });
 });
 
-export default users;
+export default userRoutes;
