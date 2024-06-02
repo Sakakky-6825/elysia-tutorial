@@ -1,8 +1,8 @@
 services:  
   - type: web
-    name: elysiajs-hello-world
+    name: sakakky-elysiajs-tutorial
     runtime: node
-    repo: https://github.com/render-examples/elysiajs-hello-world
+    repo: https://github.com/Sakakky-6825/elysia-tutorial
     plan: free
     envVars:
     - key: BUN_VERSION
