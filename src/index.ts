@@ -1,6 +1,8 @@
 import { Elysia } from "elysia";
 
-const app = new Elysia().get("/", () => "Hello Elysia");
+const app = new Elysia()
+
+app.get("/helth-check", () => "OK");
 app.listen(3000);
 
 console.log(
