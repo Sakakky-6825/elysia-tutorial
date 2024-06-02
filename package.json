@@ -4,13 +4,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts",
-    "start": "NODE_ENV=production bun src/index.ts"
+    "start": "NODE_ENV=production bun src/index.ts",
+    "seed": "bunx prisma db seed",
+    "prisma": "bunx prisma studio"
   },
   "dependencies": {
+    "@prisma/client": "5.14.0",
     "elysia": "latest"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "prisma": "^5.14.0"
   },
-  "module": "src/index.js"
+  "module": "src/index.js",
+  "prisma": {
+    "seed": "bun prisma/seed.ts"
+  }
 }
