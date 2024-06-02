@@ -6,6 +6,9 @@
     "dev": "bun run --watch src/index.ts",
     "start": "NODE_ENV=production bun src/index.ts",
     "seed": "bunx prisma db seed",
+    "migrate:dev": "bunx prisma migrate dev",
+    "migrate:dev-init": "bunx prisma migrate dev --name init",
+    "migrate:deploy": "bunx prisma migrate deploy",
     "prisma": "bunx prisma studio"
   },
   "dependencies": {
