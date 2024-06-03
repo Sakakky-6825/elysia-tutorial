@@ -1,45 +1,39 @@
 import Elysia, { t } from "elysia";
 import { prismaClient } from "../utils/prisma";
+import { UserModel } from "../models/user";
 
 const userRoutes = new Elysia().group("/users", (app) => {
-  app.get("/", async () => {
-    const users = await prismaClient.user.findMany();
+  app
+    .use(UserModel)
+    .get("/", async () => {
+      return await prismaClient.user.findMany();
+    })
+    .get("/:id", async (req) => {
+      const { id } = req.params;
 
-    return { users };
-  });
-
-  app.get("/:id", async (req) => {
-    const { id } = req.params;
-
-    const user = await prismaClient.user.findUnique({
-      where: {
-        id: Number(id),
-      },
-    });
-
-    return { user };
-  });
-
-  app.post(
-    "/",
-    async (req) => {
-      const body = req.body;
-
-      const user = await prismaClient.user.create({
-        data: body,
+      return await prismaClient.user.findUnique({
+        where: {
+          id: Number(id),
+        },
       });
+    })
+    .post(
+      "/",
+      async (req) => {
+        const body = req.body;
 
-      return { user };
-    },
-    {
-      body: t.Object({
-        username: t.String(),
-        password: t.String({
-          minLength: 8,
-        }),
-      }),
-    }
-  );
+        return await prismaClient.user.create({
+          data: {
+            username: body.username,
+            password: body.password,
+          },
+        });
+      },
+      {
+        body: "user",
+        response: "user",
+      }
+    );
 
   return app;
 });
