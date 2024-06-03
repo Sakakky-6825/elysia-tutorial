@@ -8,6 +8,18 @@ const userRoutes = new Elysia().group("/users", (app) => {
     return { users };
   });
 
+  app.get("/:id", async (req) => {
+    const { id } = req.params;
+
+    const user = await prismaClient.user.findUnique({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    return { user };
+  });
+
   app.post(
     "/",
     async (req) => {
