@@ -28,6 +28,15 @@ const userRoutes = new Elysia({ prefix: "/users" })
     {
       body: "user",
     }
-  );
+  )
+  .delete("/:id", async (req) => {
+    const { id } = req.params;
+
+    return await prismaClient.user.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+  });
 
 export default userRoutes;
