@@ -17,3 +17,18 @@ bun run dev
 ```
 
 Open http://localhost:3000/ with your browser to see the result.
+
+Build PostgreSQL in Docker
+
+```bash
+docker run -p 5432:5432 -e POSTGRES_PASSWORD=12345678 -d postgres
+```
+
+copy .env.sample to .env  
+replace `DATABASE_URL`
+
+Execute the following command.
+
+```bash
+bun run migrate:dev-init
+```
